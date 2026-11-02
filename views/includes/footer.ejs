@@ -1,0 +1,89 @@
+<style>
+/* Footer - Smartphone Responsiveness */
+
+/* .f-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.f-info-socials {
+    display: flex;
+    gap: 15px;
+}
+
+.f-info-socials i {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.f-info-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.f-info-links a {
+    white-space: nowrap;
+} */
+
+@media (max-width: 768px) {
+
+    .f-info {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        gap: 12px;
+        padding: 20px 12px;
+    }
+
+    .f-info-socials {
+        justify-content: center;
+    }
+
+    .f-info-brand {
+        font-size: 14px;
+    }
+
+    .f-info-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .f-info {
+        gap: 10px;
+        padding: 18px 10px;
+    }
+
+    .f-info-socials i {
+        font-size: 19px;
+    }
+
+    .f-info-brand {
+        font-size: 13px;
+    }
+
+    .f-info-links {
+        font-size: 13px;
+    }
+}
+</style>
+
+<footer>
+    <div class="f-info">
+        <div class="f-info-socials">
+            <i class="fa-brands fa-square-facebook"></i>
+            <i class="fa-brands fa-square-instagram"></i>
+            <i class="fa-brands fa-linkedin"></i>
+        </div>
+        <div class="f-info-brand">&copy; Roamnest Private Limited</div>
+        <div class="f-info-links">
+            <a href="/privacy">Privacy</a> &nbsp;&nbsp;
+            <a href="/terms">Terms</a>
+        </div>
+    </div>
+</footer>

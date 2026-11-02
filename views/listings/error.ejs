@@ -1,0 +1,40 @@
+<% layout("/layouts/boilerplate") %>
+    <style>
+        /* Error Page Responsive Design */
+
+        @media (max-width: 768px) {
+            .error-page {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .alert-danger {
+                width: 80%;
+                margin-left: auto;
+                margin-right: auto;
+                font-size: 15px;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .alert-danger {
+                width: 90%;
+                font-size: 14px;
+                padding: 12px;
+                text-align: center;
+            }
+
+            .alert-danger p {
+                margin-bottom: 0;
+                overflow-wrap: anywhere;
+            }
+        }
+    </style>
+    <div class="row mt-3 error-page">
+        <div class="alert alert-danger mt-3 col-6 offset-3" role="alert">
+            <p>
+                <%= message %>
+            </p>
+        </div>
+    </div>

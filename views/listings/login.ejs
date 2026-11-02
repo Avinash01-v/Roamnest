@@ -1,0 +1,62 @@
+<% layout("/layouts/boilerplate") %>
+    <style>
+        /* Login Page Responsive Design */
+
+        @media (max-width: 768px) {
+            .login-page .col-8.offset-2 {
+                width: 90%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .login-page h3 {
+                font-size: 24px;
+            }
+
+            .login-page .form-control {
+                font-size: 15px;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-page .col-8.offset-2 {
+                width: 92%;
+                padding: 0 5px;
+            }
+
+            .login-page h3 {
+                font-size: 21px;
+                margin-bottom: 20px;
+            }
+
+            .login-page .form-label {
+                font-size: 14px;
+            }
+
+            .login-page .btn {
+                width: 100%;
+                padding: 10px;
+            }
+        }
+    </style>
+
+    <body>
+        <div class="row login-page">
+            <div class="col-8 offset-2">
+                <form action="/login" method="POST" novalidate class="needs-validation">
+                    <h3>Login to Roamnest</h3>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">username</label>
+                        <input name="username" placeholder="enter username" type="text" class="form-control"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">password</label>
+                        <input placeholder="" name="password" type="password" class="form-control" required>
+                    </div>
+                    <div class="mb-3"><button class="btn btn-success">Submit</button></div>
+                </form>
+            </div>
+        </div>
+    </body>

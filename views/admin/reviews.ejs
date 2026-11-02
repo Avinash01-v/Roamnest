@@ -1,0 +1,194 @@
+<% layout("/layouts/boilerplate") %>
+
+    <style>
+        /* Admin Reviews Management */
+
+        .admin-review-rating {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #b91c1c;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .admin-review-comment {
+            min-width: 200px;
+            max-width: 360px;
+            overflow-wrap: anywhere;
+            color: #4b5563;
+        }
+
+        /* Admin Reviews - Smartphone Responsiveness */
+
+        @media (max-width: 768px) {
+
+            .admin-dashboard {
+                padding: 16px;
+            }
+
+            .admin-heading {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .admin-heading h2 {
+                font-size: 23px;
+            }
+
+            .admin-heading p {
+                font-size: 14px;
+            }
+
+            .admin-panel {
+                padding: 14px;
+                min-width: 0;
+                overflow: hidden;
+            }
+
+            /* Reviews table */
+            .table-responsive {
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .admin-panel table {
+                min-width: 750px;
+                font-size: 13px;
+            }
+
+            .admin-panel table th,
+            .admin-panel table td {
+                padding: 10px 8px;
+                white-space: nowrap;
+            }
+
+            /* Review comment */
+            .admin-review-comment {
+                min-width: 200px;
+                max-width: 300px;
+                white-space: normal !important;
+                overflow-wrap: anywhere;
+            }
+
+            .admin-review-rating {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .admin-dashboard {
+                padding: 12px;
+            }
+
+            .admin-heading h2 {
+                font-size: 21px;
+            }
+
+            .admin-panel {
+                padding: 10px;
+            }
+
+            .admin-panel table {
+                font-size: 12px;
+            }
+
+            .admin-review-comment {
+                min-width: 180px;
+                max-width: 240px;
+                font-size: 12px;
+            }
+
+            .admin-review-rating {
+                font-size: 11px;
+            }
+        }
+    </style>
+
+    <div class="admin-layout">
+        <%- include("partials/sidebar.ejs") %>
+
+            <main class="admin-main">
+                <div class="admin-dashboard">
+
+                    <div class="admin-heading">
+                        <div>
+                            <h2>Reviews Management</h2>
+                            <p>Monitor property reviews and customer feedback.</p>
+                        </div>
+
+                        <span>
+                            <i class="fa-solid fa-star"></i>
+                            Total: <%= reviewData.length %>
+                        </span>
+                    </div>
+
+                    <div class="admin-panel">
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Property</th>
+                                        <th>Author</th>
+                                        <th>Rating</th>
+                                        <th>Comment</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <% if (reviewData.length===0) { %>
+                                        <tr>
+                                            <td colspan="6" class="text-center py-4">
+                                                No reviews found.
+                                            </td>
+                                        </tr>
+                                        <% } else { %>
+
+                                            <% reviewData.forEach((item, index)=> { %>
+                                                <tr>
+                                                    <td>
+                                                        <%= index + 1 %>
+                                                    </td>
+
+                                                    <td>
+                                                        <%= item.listingTitle %>
+                                                    </td>
+
+                                                    <td>
+                                                        <%= item.review.author ? item.review.author.username
+                                                            : "User unavailable" %>
+                                                    </td>
+
+                                                    <td>
+                                                        <span class="admin-review-rating">
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <%= item.review.rating %>/5
+                                                        </span>
+                                                    </td>
+
+                                                    <td class="admin-review-comment">
+                                                        <%= item.review.comment || "—" %>
+                                                    </td>
+
+                                                    <td>
+                                                        <%= item.review.createdAt ? new
+                                                            Date(item.review.createdAt).toLocaleDateString("en-IN")
+                                                            : "—" %>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+
+                                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+    </div>

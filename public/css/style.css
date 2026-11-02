@@ -1,0 +1,351 @@
+body {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+}
+
+.navbar {
+    height: 4rem;
+    background-color: white;
+}
+
+.fa-compass-drafting {
+    color: #fe422d;
+    font-size: 2rem;
+}
+
+.nav-link {
+    color: #222222 !important;
+}
+
+
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info {
+    height: 8rem;
+    background-color: #ebebeb;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.f-info-socials,
+.f-info-links,
+.f-info-brand {
+    width: 100%;
+}
+
+.f-info-socials i {
+    font-size: 1.2rem;
+    margin: 0.5rem;
+}
+
+
+
+.listing-card {
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+.listing-link {
+    text-decoration: none;
+}
+
+.card-img-overlay {
+    opacity: 0;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.2;
+    background-color: white;
+}
+
+
+.show-img {
+    height: 30vh;
+}
+
+.showbtns {
+    display: flex;
+    gap: 1rem;
+    margin-left: 1rem;
+}
+
+#map {
+    width: 100%;
+    height: 400px;
+}
+
+
+
+/* Roamnest booking card */
+.booking-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 16px !important;
+    box-shadow: 0 6px 24px rgba(20, 40, 50, 0.07) !important;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.booking-card .card-body {
+    padding: 24px;
+}
+
+.booking-title {
+    color: #203b3a;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.4px;
+}
+
+.booking-subtitle {
+    color: #77817f;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.booking-card {
+    color: #293b3a;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    width: 90%;
+    margin-left: 1rem;
+}
+
+.booking-card {
+    min-height: 48px;
+    padding: 11px 13px;
+    color: #293b3a;
+    background: #fff;
+    border: 1px solid #dfe5e4;
+    border-radius: 9px;
+    font-size: 0.92rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    width: 90%;
+    margin-left: 1rem;
+}
+
+.booking-card .form-control:focus {
+    border-color: #367b73;
+    box-shadow: 0 0 0 3px rgba(54, 123, 115, 0.12);
+    outline: none;
+}
+
+.booking-btn {
+    min-height: 49px;
+    border: 1px solid #245c56;
+    border-radius: 9px;
+    background-color: #de6153 !important;
+    color: #fff !important;
+    font-size: 0.96rem;
+    font-weight: 600;
+    transition: background 0.2s ease;
+    width: 90% !important;
+    margin-left: 1rem;
+}
+
+.booking-btn:hover,
+.booking-btn:focus {
+    border-color: #194943;
+    color: #fff;
+}
+
+.booking-btn:hover {
+    background: #e44735 !important;
+}
+
+.booking-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 13px;
+    margin: 18px 0 0;
+    border-radius: 10px;
+    background: #f0f7f5;
+    color: #42645e;
+    font-size: 0.83rem;
+    line-height: 1.5;
+}
+
+.booking-notice i {
+    margin-top: 3px;
+    color: #367b73;
+}
+
+@media (max-width: 576px) {
+    .booking-card .card-body {
+        padding: 19px;
+    }
+
+    .booking-title {
+        font-size: 1.25rem;
+    }
+}
+
+
+
+
+/* Roamnest Admin Dashboard */
+
+.admin-dashboard {
+    padding: 28px;
+    background: #fffafa;
+    min-height: 80vh;
+}
+
+.admin-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.admin-heading h2 {
+    color: #b91c1c;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.admin-heading p {
+    color: #6b7280;
+    margin: 0;
+}
+
+.admin-heading > span {
+    color: #6b7280;
+    white-space: nowrap;
+}
+
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+.admin-stat {
+    display: block;
+    background: #fff;
+    border: 1px solid #fee2e2;
+    border-radius: 12px;
+    padding: 20px;
+    color: #1f2937;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.admin-stat:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(185, 28, 28, 0.08);
+    color: #b91c1c;
+}
+
+.admin-stat i {
+    font-size: 22px;
+    color: #b91c1c;
+    margin-bottom: 14px;
+}
+
+.admin-stat p {
+    margin: 0 0 6px;
+    color: #6b7280;
+}
+
+.admin-stat h3 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.admin-content-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+}
+
+.admin-panel {
+    min-width: 0;
+    background: #fff;
+    border: 1px solid #fee2e2;
+    border-radius: 12px;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.admin-panel h4 {
+    color: #991b1b;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.admin-panel h4 i {
+    margin-right: 8px;
+}
+
+.admin-panel thead th {
+    background: #fff1f2;
+    color: #991b1b;
+    white-space: nowrap;
+}
+
+.admin-panel td {
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .admin-dashboard {
+        padding: 16px;
+    }
+
+    .admin-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .admin-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .admin-stat {
+        padding: 14px;
+    }
+
+    .admin-stat h3 {
+        font-size: 23px;
+    }
+
+    .admin-panel {
+        padding: 12px;
+    }
+}

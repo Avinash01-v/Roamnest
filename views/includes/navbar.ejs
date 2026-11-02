@@ -1,0 +1,286 @@
+<style>
+  .search-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .search-center form {
+    width: 400px;
+  }
+
+  .search-center input {
+    border-radius: 25px;
+    padding: 0 2rem 0 2rem;
+  }
+
+  .btn-search {
+    background-color: #fe422d;
+    color: #fff;
+    border-radius: 25px;
+    white-space: nowrap;
+  }
+
+  .btn-search:hover {
+    background-color: #e63825;
+    color: #fff;
+  }
+
+  .btn-search i {
+    margin-right: 0.5rem;
+  }
+
+  @media (max-width: 991px) {
+    .search-center {
+      position: static;
+      transform: none;
+      margin: 10px 0;
+    }
+
+    .search-center form {
+      width: 100%;
+    }
+  }
+
+  .search-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .search-center form {
+    width: 400px;
+  }
+
+  .search-center input {
+    border-radius: 25px;
+    padding: 0 2rem;
+  }
+
+  .btn-search {
+    background-color: #fe422d;
+    color: #fff;
+    border-radius: 25px;
+    white-space: nowrap;
+  }
+
+  .btn-search:hover {
+    background-color: #e63825;
+    color: #fff;
+  }
+
+  .btn-search i {
+    margin-right: 0.5rem;
+  }
+
+  @media (max-width: 991px) {
+    .search-center {
+      position: static;
+      transform: none;
+      margin: 12px 0;
+      width: 100%;
+    }
+
+    .search-center form {
+      width: 100%;
+    }
+
+    .search-center input {
+      min-width: 0;
+    }
+
+    .navbar-collapse {
+      width: 100%;
+    }
+
+    .navbar-nav {
+      align-items: stretch;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .search-center form {
+      gap: 6px;
+    }
+
+    .search-center input {
+      font-size: 13px;
+      padding: 8px 12px;
+    }
+
+    .btn-search {
+      font-size: 13px;
+      padding: 8px 12px;
+    }
+  }
+
+  /* Mobile Navbar Background */
+
+  @media (max-width: 991px) {
+    .navbar-collapse {
+      background-color: #fff;
+      padding: 15px;
+      margin-top: 10px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-collapse .navbar-nav {
+      gap: 8px;
+    }
+
+    .navbar-collapse .nav-link {
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .navbar-collapse .nav-link:hover {
+      background-color: #f5f5f5;
+    }
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="/listings">
+      <i class="fa-sharp fa-solid fa-compass-drafting"></i>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <!-- Left navigation -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/listings">Explore</a>
+        </li>
+
+        <% if (currUser) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/bookings">
+              <i class="fa-regular fa-calendar-check"></i>
+              Booking Requests
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/my-trips">
+              <i class="fa-solid fa-suitcase"></i>
+              My Trips
+            </a>
+          </li>
+          <% } %>
+      </ul>
+
+      <!-- Search bar -->
+      <div class="navbar-nav search-center ">
+        <form class="d-flex" role="search" action="/listings/search" method="get">
+
+          <input class="form-control me-2" type="search" name="query" placeholder="Search destinations"
+            aria-label="Search" value="<%= typeof query !== 'undefined' ? query : '' %>">
+
+          <button class="btn btn-search" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>Search
+          </button>
+        </form>
+      </div>
+
+      <!-- Right navigation -->
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/listings/new">
+            Airbnb your home
+          </a>
+        </li>
+
+        <% if (!currUser) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/signUp"><b>Sign Up</b></a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/login"><b>Log In</b></a>
+          </li>
+          <% } %>
+
+            <% if (currUser) { %>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout"><b>Log Out</b></a>
+              </li>
+              <% } %>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+
+<!-- <nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings"><i class="fa-sharp fa-solid fa-compass-drafting"></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/listings">Explore</a>
+        </li>
+        <% if (currUser) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/bookings">
+              <i class="fa-regular fa-calendar-check"></i>
+              Booking Requests
+            </a>
+          </li>
+          <% } %>
+            <% if (currUser) { %>
+              <a class="nav-link" href="/my-trips">
+                <i class="fa-solid fa-suitcase"></i>
+                My Trips
+              </a>
+              <% } %>
+      </ul>
+    </div>
+
+    <div class="navbar-nav search-center">
+      <form class="d-flex" role="search" action="/listings/search" method="get">
+        <input class="form-control me-2" type="search" name="query" placeholder="Search destinations"
+          aria-label="Search" value="<%= typeof query !== 'undefined' ? query : '' %>">
+        <button class="btn btn-search" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>Search
+        </button>
+      </form>
+    </div>
+
+
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/listings/new">Airbnb your home</a>
+        </li>
+        <% if(!currUser) { %>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/signUp"><b>Sign Up</b></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login"><b>Log In</b></a>
+          </li>
+          <% } %>
+            <% if(currUser) { %>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout"><b>Log Out</b></a>
+              </li>
+              <% } %>
+      </ul>
+    </div>
+  </div>
+</nav> -->

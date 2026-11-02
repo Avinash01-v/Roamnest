@@ -1,0 +1,214 @@
+<% layout("/layouts/boilerplate") %>
+
+    <style>
+        /* Admin Bookings Management */
+
+        .admin-search-form .form-select {
+            width: auto;
+            min-width: 180px;
+            border-color: #fecaca;
+        }
+
+        .admin-search-form .form-select:focus {
+            border-color: #b91c1c;
+            box-shadow: 0 0 0 0.2rem rgba(185, 28, 28, 0.12);
+        }
+        .admin-search-form {
+            display: flex;
+            align-items: center;
+        }
+
+        @media (max-width: 576px) {
+            .admin-search-form .form-select {
+                width: 100%;
+            }
+        }
+        /* Smartphone Responsiveness */
+@media (max-width: 576px) {
+
+    .admin-dashboard {
+        padding: 12px;
+    }
+
+    .admin-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .admin-heading h2 {
+        font-size: 22px;
+    }
+
+    .admin-heading p {
+        font-size: 13px;
+    }
+
+    .admin-panel {
+        padding: 12px;
+        overflow: hidden;
+    }
+
+    /* Filter form */
+    .admin-search-form {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        height: auto !important;
+    }
+
+    .admin-search-form .form-select {
+        width: 100%;
+        min-width: 0;
+        margin-right: 0 !important;
+    }
+
+    .admin-search-form button,
+    .admin-search-form a {
+        width: 100%;
+        margin-right: 0 !important;
+    }
+
+    /* Bookings table */
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .admin-panel table {
+        min-width: 650px;
+        font-size: 13px;
+    }
+
+    .admin-panel table th,
+    .admin-panel table td {
+        white-space: nowrap;
+        padding: 10px 8px;
+    }
+
+    .admin-panel .badge {
+        font-size: 11px;
+    }
+}
+    </style>
+
+    <div class="admin-layout">
+        <%- include("partials/sidebar.ejs") %>
+
+            <main class="admin-main">
+                <div class="admin-dashboard">
+
+                    <div class="admin-heading">
+                        <div>
+                            <h2>Bookings Management</h2>
+                            <p>Review property reservations across Roamnest.</p>
+                        </div>
+
+                        <span>
+                            <i class="fa-solid fa-calendar-check"></i>
+                            Total: <%= bookings.length %>
+                        </span>
+                    </div>
+
+                    <div class="admin-panel">
+
+                        <form action="/admin/bookings" method="GET" class="admin-search-form mb-3"
+                            style="height: 1.5rem;">
+                            <select name="status" class="form-select" style="margin-right: 1rem;">
+                                <option value="" <%=!status ? "selected" : "" %>>
+                                    All statuses
+                                </option>
+                                <option value="pending" <%=status==="pending" ? "selected" : "" %>>
+                                    Pending
+                                </option>
+                                <option value="confirmed" <%=status==="confirmed" ? "selected" : "" %>>
+                                    Confirmed
+                                </option>
+                                <option value="rejected" <%=status==="rejected" ? "selected" : "" %>>
+                                    Rejected
+                                </option>
+                                <option value="cancelled" <%=status==="cancelled" ? "selected" : "" %>>
+                                    Cancelled
+                                </option>
+                            </select>
+
+                            <button type="submit" class="btn btn-danger" style="margin-right: 1rem;">
+                                Filter
+                            </button>
+
+                            <a href="/admin/bookings" class="btn btn-outline-danger" style="margin-right: 1rem;">
+                                Reset
+                            </a>
+                        </form>
+
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Property</th>
+                                        <th>Guest</th>
+                                        <th>Check-in</th>
+                                        <th>Check-out</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <% if (bookings.length===0) { %>
+                                        <tr>
+                                            <td colspan="6" class="text-center py-4">
+                                                No bookings found.
+                                            </td>
+                                        </tr>
+                                        <% } else { %>
+
+                                            <% bookings.forEach((booking, index)=> { %>
+                                                <tr>
+                                                    <td>
+                                                        <%= index + 1 %>
+                                                    </td>
+
+                                                    <td>
+                                                        <%= booking.listing ? booking.listing.title
+                                                            : "Listing unavailable" %>
+                                                    </td>
+
+                                                    <td>
+                                                        <%= booking.guest ? booking.guest.username : "Guest unavailable"
+                                                            %>
+                                                    </td>
+
+                                                    <td>
+                                                        <%= booking.checkIn ? new
+                                                            Date(booking.checkIn).toLocaleDateString("en-IN") : "—" %>
+                                                    </td>
+
+                                                    <td>
+                                                        <%= booking.checkOut ? new
+                                                            Date(booking.checkOut).toLocaleDateString("en-IN") : "—" %>
+                                                    </td>
+
+                                                    <td>
+                                                        <span class="badge <%= 
+                                                booking.status === 'confirmed' ? 'bg-success' :
+                                                booking.status === 'rejected' ? 'bg-danger' :
+                                                booking.status === 'cancelled' ? 'bg-secondary' :
+                                                'bg-warning text-dark'
+                                            %>">
+                                                            <%= booking.status || "pending" %>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+
+                                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+    </div>

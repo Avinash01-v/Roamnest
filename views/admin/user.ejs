@@ -1,0 +1,224 @@
+<% layout("/layouts/boilerplate") %>
+
+    <style>
+        /* Admin Users Management */
+
+        .admin-search-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .admin-search-form .form-control {
+            min-width: 0;
+            border-color: #fecaca;
+        }
+
+        .admin-search-form .form-control:focus {
+            border-color: #b91c1c;
+            box-shadow: 0 0 0 0.2rem rgba(185, 28, 28, 0.12);
+        }
+
+        .admin-panel tbody tr:hover td {
+            background: #fffafa;
+        }
+
+        .admin-panel td {
+            vertical-align: middle;
+        }
+
+        @media (max-width: 576px) {
+            .admin-search-form {
+                flex-wrap: wrap;
+            }
+
+            .admin-search-form .form-control {
+                flex-basis: 100%;
+            }
+        }
+
+        /* Admin Users - Smartphone Responsiveness */
+
+        @media (max-width: 768px) {
+
+            .admin-dashboard {
+                padding: 16px;
+            }
+
+            .admin-heading {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .admin-heading h2 {
+                font-size: 23px;
+            }
+
+            .admin-heading p {
+                font-size: 14px;
+            }
+
+            .admin-panel {
+                padding: 14px;
+                min-width: 0;
+                overflow: hidden;
+            }
+
+            /* Search form */
+            .admin-search-form {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+                height: auto !important;
+            }
+
+            .admin-search-form .form-control,
+            .admin-search-form button,
+            .admin-search-form a {
+                width: 100%;
+                min-width: 0;
+            }
+
+            /* Users table */
+            .table-responsive {
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .admin-panel table {
+                min-width: 650px;
+                font-size: 13px;
+            }
+
+            .admin-panel table th,
+            .admin-panel table td {
+                padding: 10px 8px;
+                white-space: nowrap;
+            }
+
+            .admin-panel td small {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .admin-dashboard {
+                padding: 12px;
+            }
+
+            .admin-heading h2 {
+                font-size: 21px;
+            }
+
+            .admin-panel {
+                padding: 10px;
+            }
+
+            .admin-panel table {
+                font-size: 12px;
+            }
+
+            .admin-panel td small {
+                font-size: 10px;
+            }
+        }
+    </style>
+
+    <div class="admin-layout">
+        <%- include("partials/sidebar.ejs") %>
+
+            <main class="admin-main">
+                <div class="admin-dashboard">
+
+                    <div class="admin-heading">
+                        <div>
+                            <h2>Users Management</h2>
+                            <p>View and manage registered Roamnest users.</p>
+                        </div>
+
+                        <span>
+                            <i class="fa-solid fa-users"></i>
+                            Total: <%= users.length %>
+                        </span>
+                    </div>
+
+                    <div class="admin-panel">
+                        <form action="/admin/users" method="GET" class="admin-search-form" style="height: 2rem;">
+                            <input type="text" name="search" class="form-control"
+                                placeholder="Search by username or email..." value="<%= search %>">
+
+                            <button type="submit" class="btn btn-danger"
+                                style="font-size: 1rem; display: flex; align-items: center;">
+                                <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+                                Search
+                            </button>
+
+                            <a href="/admin/users" class="btn btn-outline-danger"
+                                style="display: flex; align-items: center;">
+                                Reset
+                            </a>
+                        </form>
+
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Account ID</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <% if (users.length===0) { %>
+                                        <tr>
+                                            <td colspan="5" class="text-center py-4">
+                                                No users found.
+                                            </td>
+                                        </tr>
+                                        <% } else { %>
+
+                                            <% users.forEach((user, index)=> { %>
+                                                <tr>
+                                                    <td>
+                                                        <%= index + 1 %>
+                                                    </td>
+
+                                                    <td>
+                                                        <i class="fa-regular fa-user me-2" style="color:#b91c1c"></i>
+                                                        <%= user.username %>
+                                                    </td>
+
+                                                    <td>
+                                                        <%= user.email %>
+                                                    </td>
+
+                                                    <td>
+                                                        <span
+                                                            class="badge <%= user.role === 'admin' ? 'bg-danger' : 'bg-light text-dark' %>">
+                                                            <%= user.role || "user" %>
+                                                        </span>
+                                                    </td>
+
+                                                    <td>
+                                                        <small>
+                                                            <%= user._id %>
+                                                        </small>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+
+                                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+    </div>

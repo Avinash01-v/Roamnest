@@ -1,0 +1,341 @@
+<style>
+    
+/* Admin sidebar layout */
+.admin-layout {
+    display: flex;
+    min-height: 85vh;
+    background: #fffafa;
+}
+
+.admin-sidebar {
+    width: 245px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 24px 16px;
+    background: #991b1b;
+    color: #fff;
+}
+
+.admin-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px 24px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.admin-brand i {
+    font-size: 25px;
+}
+
+.admin-menu-label {
+    margin: 12px 10px 8px;
+    color: #fecaca;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.admin-menu-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    color: #fee2e2;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.admin-menu-link i {
+    width: 20px;
+    text-align: center;
+}
+
+.admin-menu-link:hover,
+.admin-menu-link.active {
+    background: #b91c1c;
+    color: #fff;
+}
+
+.admin-sidebar-bottom {
+    margin-top: auto;
+    padding-top: 24px;
+}
+
+.admin-main {
+    flex: 1;
+    min-width: 0;
+}
+
+@media (max-width: 768px) {
+    .admin-sidebar {
+        width: 68px;
+        padding: 18px 8px;
+    }
+
+    .admin-brand {
+        justify-content: center;
+        padding: 8px 0 20px;
+    }
+
+    .admin-brand span,
+    .admin-menu-label,
+    .admin-menu-link span {
+        display: none;
+    }
+
+    .admin-menu-link {
+        justify-content: center;
+        padding: 13px 8px;
+    }
+
+    .admin-menu-link i {
+        width: auto;
+    }
+}
+
+
+/* =================================
+   ROAMNEST ADMIN RESPONSIVE DESIGN
+================================= */
+
+.admin-mobile-toggle {
+    display: none;
+}
+
+.admin-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Tablets and smartphones */
+@media (max-width: 768px) {
+
+    .admin-layout {
+        flex-direction: column;
+        min-height: 85vh;
+    }
+
+    .admin-sidebar {
+        width: 100%;
+        padding: 12px 16px;
+        gap: 8px;
+    }
+
+    .admin-brand {
+        padding: 5px 0;
+        font-size: 21px;
+    }
+
+    .admin-mobile-toggle {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #c75b5b;
+        border-radius: 7px;
+        background: #b91c1c;
+        color: white;
+        text-align: left;
+    }
+
+    .admin-nav {
+        display: none;
+    }
+
+    .admin-sidebar.show-menu .admin-nav {
+        display: flex;
+    }
+
+    .admin-menu-label {
+        margin-top: 8px;
+    }
+
+    .admin-menu-link {
+        padding: 11px;
+    }
+
+    .admin-sidebar-bottom {
+        margin-top: 0;
+        padding-top: 0;
+    }
+
+    .admin-main {
+        width: 100%;
+    }
+
+    .admin-dashboard {
+        padding: 16px;
+    }
+
+    .admin-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .admin-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .admin-panel {
+        padding: 12px;
+    }
+
+    .admin-content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .admin-panel table {
+        min-width: 650px;
+    }
+
+    .admin-property {
+        min-width: 180px;
+    }
+}
+
+/* Small smartphones */
+@media (max-width: 480px) {
+
+    .admin-dashboard {
+        padding: 12px;
+    }
+
+    .admin-heading h2 {
+        font-size: 22px;
+    }
+
+    .admin-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .admin-stat {
+        padding: 12px;
+    }
+
+    .admin-stat h3 {
+        font-size: 22px;
+    }
+
+    .admin-stat p {
+        font-size: 13px;
+    }
+
+    .admin-search-form {
+        flex-direction: column;
+    }
+
+    .admin-search-form .form-control,
+    .admin-search-form .form-select,
+    .admin-search-form button,
+    .admin-search-form a {
+        width: 100%;
+    }
+}
+
+
+</style>
+
+
+<!-- <aside class="admin-sidebar">
+    <a href="/admin" class="admin-brand">
+        <i class="fa-solid fa-compass-drafting"></i>
+        <span>Roamnest</span>
+    </a>
+
+    <p class="admin-menu-label">MAIN MENU</p>
+
+    <a href="/admin" class="admin-menu-link">
+        <i class="fa-solid fa-chart-line"></i>
+        <span>Dashboard</span>
+    </a>
+
+    <a href="/admin/users" class="admin-menu-link">
+        <i class="fa-solid fa-users"></i>
+        <span>Users</span>
+    </a>
+
+    <a href="/admin/listings" class="admin-menu-link">
+        <i class="fa-solid fa-house"></i>
+        <span>Listings</span>
+    </a>
+
+    <a href="/admin/bookings" class="admin-menu-link">
+        <i class="fa-solid fa-calendar-check"></i>
+        <span>Bookings</span>
+    </a>
+
+    <a href="/admin/reviews" class="admin-menu-link">
+        <i class="fa-solid fa-star"></i>
+        <span>Reviews</span>
+    </a>
+
+    <div class="admin-sidebar-bottom">
+        <a href="/listings" class="admin-menu-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Back to Website</span>
+        </a>
+    </div>
+</aside> -->
+
+
+<aside class="admin-sidebar">
+    <a href="/admin" class="admin-brand">
+        <i class="fa-solid fa-compass"></i>
+        <span>Roamnest</span>
+    </a>
+
+    <button class="admin-mobile-toggle" type="button"
+            onclick="document.querySelector('.admin-sidebar').classList.toggle('show-menu')">
+        <i class="fa-solid fa-bars"></i>
+        <span>Admin Menu</span>
+    </button>
+
+    <nav class="admin-nav">
+        <p class="admin-menu-label">MAIN MENU</p>
+
+        <a href="/admin" class="admin-menu-link">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="/admin/users" class="admin-menu-link">
+            <i class="fa-solid fa-users"></i>
+            <span>Users</span>
+        </a>
+
+        <a href="/admin/listings" class="admin-menu-link">
+            <i class="fa-solid fa-house"></i>
+            <span>Listings</span>
+        </a>
+
+        <a href="/admin/bookings" class="admin-menu-link">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>Bookings</span>
+        </a>
+
+        <a href="/admin/reviews" class="admin-menu-link">
+            <i class="fa-solid fa-star"></i>
+            <span>Reviews</span>
+        </a>
+
+        <a href="/listings" class="admin-menu-link admin-back-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Back to Website</span>
+        </a>
+    </nav>
+</aside>

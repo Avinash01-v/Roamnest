@@ -1,0 +1,266 @@
+<% layout("/layouts/boilerplate") %>
+    <style>
+        /* Admin Dashboard - Smartphone Responsiveness */
+
+        @media (max-width: 768px) {
+
+            .admin-dashboard {
+                padding: 16px;
+            }
+
+            .admin-heading {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .admin-heading h2 {
+                font-size: 23px;
+            }
+
+            .admin-heading p {
+                font-size: 14px;
+            }
+
+            /* Dashboard statistics */
+            .admin-stats {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
+            }
+
+            .admin-stat {
+                padding: 14px;
+            }
+
+            .admin-stat h3 {
+                font-size: 23px;
+            }
+
+            /* Recent bookings and users */
+            .admin-content-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .admin-panel {
+                padding: 14px;
+                min-width: 0;
+                overflow: hidden;
+            }
+
+            .admin-panel h4 {
+                font-size: 17px;
+            }
+
+            .table-responsive {
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .admin-panel table {
+                min-width: 550px;
+                font-size: 13px;
+            }
+
+            .admin-panel table th,
+            .admin-panel table td {
+                white-space: nowrap;
+                padding: 10px 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .admin-dashboard {
+                padding: 12px;
+            }
+
+            .admin-heading h2 {
+                font-size: 21px;
+            }
+
+            .admin-heading span {
+                font-size: 13px;
+            }
+
+            .admin-stats {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+            }
+
+            .admin-stat {
+                padding: 12px;
+            }
+
+            .admin-stat i {
+                font-size: 20px;
+            }
+
+            .admin-stat p {
+                font-size: 12px;
+                margin-bottom: 6px;
+            }
+
+            .admin-stat h3 {
+                font-size: 21px;
+            }
+
+            .admin-panel {
+                padding: 10px;
+            }
+        }
+    </style>
+    <div class="admin-layout">
+        <%- include("partials/sidebar.ejs") %>
+
+            <main class="admin-main">
+
+                <div class="admin-dashboard">
+                    <div class="admin-heading">
+                        <div>
+                            <h2>Welcome, Admin!</h2>
+                            <p>Here's what's happening on your Roamnest platform today.</p>
+                        </div>
+                        <span><i class="fa-regular fa-calendar"></i>
+                            <%= new Date().toLocaleDateString("en-IN") %>
+                        </span>
+                    </div>
+
+                    <div class="admin-stats">
+                        <a href="/admin/users" class="admin-stat">
+                            <i class="fa-solid fa-users"></i>
+                            <p>Total Users</p>
+                            <h3>
+                                <%= totalUsers %>
+                            </h3>
+                        </a>
+
+                        <a href="/admin/listings" class="admin-stat">
+                            <i class="fa-solid fa-house"></i>
+                            <p>Total Listings</p>
+                            <h3>
+                                <%= totalListings %>
+                            </h3>
+                        </a>
+
+                        <a href="/admin/bookings" class="admin-stat">
+                            <i class="fa-regular fa-calendar-check"></i>
+                            <p>Total Bookings</p>
+                            <h3>
+                                <%= totalBookings %>
+                            </h3>
+                        </a>
+
+                        <a href="/admin/reviews" class="admin-stat">
+                            <i class="fa-regular fa-star"></i>
+                            <p>Total Reviews</p>
+                            <h3>
+                                <%= totalReviews %>
+                            </h3>
+                        </a>
+
+                        <a href="/admin/bookings?status=pending" class="admin-stat">
+                            <i class="fa-solid fa-clock"></i>
+                            <p>Pending Bookings</p>
+                            <h3>
+                                <%= pendingBookings %>
+                            </h3>
+                        </a>
+                    </div>
+
+                    <div class="admin-content-grid">
+                        <section class="admin-panel">
+                            <h4><i class="fa-solid fa-calendar-check"></i> Recent Bookings</h4>
+
+                            <% if (recentBookings.length===0) { %>
+                                <p>No bookings yet.</p>
+                                <% } else { %>
+                                    <div class="table-responsive">
+                                        <table class="table align-middle">
+                                            <thead>
+                                                <tr>
+                                                    <th>Property</th>
+                                                    <th>Guest</th>
+                                                    <th>Check-in</th>
+                                                    <th>Check-out</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% recentBookings.forEach(booking=> { %>
+                                                    <tr>
+                                                        <td>
+                                                            <%= booking.listing ? booking.listing.title
+                                                                : "Listing unavailable" %>
+                                                        </td>
+                                                        <td>
+                                                            <%= booking.guest ? booking.guest.username
+                                                                : "User unavailable" %>
+                                                        </td>
+                                                        <td>
+                                                            <%= new Date(booking.checkIn).toLocaleDateString("en-IN") %>
+                                                        </td>
+                                                        <td>
+                                                            <%= new Date(booking.checkOut).toLocaleDateString("en-IN")
+                                                                %>
+                                                        </td>
+                                                        <td>
+                                                            <span class="badge <%= 
+                                            booking.status === 'confirmed' ? 'bg-success' :
+                                            booking.status === 'rejected' ? 'bg-danger' :
+                                            booking.status === 'cancelled' ? 'bg-secondary' :
+                                            'bg-warning text-dark'
+                                        %>">
+                                                                <%= booking.status %>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    <% }) %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <% } %>
+                        </section>
+
+                        <section class="admin-panel">
+                            <h4><i class="fa-solid fa-user-group"></i> Recent Users</h4>
+
+                            <% if (recentUsers.length===0) { %>
+                                <p>No registered users yet.</p>
+                                <% } else { %>
+                                    <div class="table-responsive">
+                                        <table class="table align-middle">
+                                            <thead>
+                                                <tr>
+                                                    <th>Username</th>
+                                                    <th>Email</th>
+                                                    <th>Role</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% recentUsers.forEach(user=> { %>
+                                                    <tr>
+                                                        <td>
+                                                            <%= user.username %>
+                                                        </td>
+                                                        <td>
+                                                            <%= user.email %>
+                                                        </td>
+                                                        <td>
+                                                            <span
+                                                                class="badge <%= user.role === 'admin' ? 'bg-danger' : 'bg-light text-dark' %>">
+                                                                <%= user.role || 'user' %>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    <% }) %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <% } %>
+                        </section>
+                    </div>
+                </div>
+            </main>
+    </div>

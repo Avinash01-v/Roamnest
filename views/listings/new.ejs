@@ -1,0 +1,135 @@
+<% layout("/layouts/boilerplate") %>
+    <style>
+        /* Create Listing Page - Responsive Design */
+
+        @media (max-width: 768px) {
+            .create-listing-page .col-8.offset-2 {
+                width: 90%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .create-listing-page h3 {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            .create-listing-page .form-control,
+            .create-listing-page .form-select {
+                font-size: 15px;
+                padding: 10px;
+            }
+
+            .create-listing-page textarea {
+                min-height: 110px;
+            }
+
+            .create-listing-page .row .col-md-4,
+            .create-listing-page .row .col-md-8 {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .create-listing-page .col-8.offset-2 {
+                width: 94%;
+                padding: 0 5px;
+            }
+
+            .create-listing-page h3 {
+                font-size: 21px;
+            }
+
+            .create-listing-page .form-label {
+                font-size: 14px;
+            }
+
+            .create-listing-page .form-control,
+            .create-listing-page .form-select {
+                font-size: 14px;
+                padding: 9px;
+            }
+
+            .create-listing-page textarea {
+                min-height: 100px;
+            }
+
+            .create-listing-page button {
+                width: 100%;
+                padding: 10px;
+            }
+        }
+    </style>
+
+    <body>
+        <div class="row create-listing-page">
+            <div class="col-8 offset-2">
+                <form action="/listings" method="POST" novalidate class="needs-validation"
+                    enctype="multipart/form-data">
+                    <h3>Create a new listing</h3>
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input placeholder="enter title" name="listing[title]" type="text" class="form-control"
+                            required>
+                        <div class="valid-feedback">looks great!</div>
+                        <div class="invalid-feedback">Title should be valid</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea name="listing[description]" placeholder="enter description" type="text"
+                            class="form-control" required></textarea>
+                        <div class="valid-feedback">looks great!</div>
+                        <div class="invalid-feedback">Description should be valid</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image file</label>
+                        <input placeholder=" " name="listing[image][url]" type="file" class="form-control">
+                        <div class="valid-feedback">looks great!</div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-4">
+                            <label for="price" class="form-label">Price</label>
+                            <input placeholder="1200" name="listing[price]" type="number" class="form-control" required>
+                            <div class="valid-feedback">looks great!</div>
+                            <div class="invalid-feedback">Price should be valid</div>
+                        </div>
+                        <div class="mb-3 col-md-8">
+                            <label for="country" class="form-label">Country</label>
+                            <input placeholder="India" name="listing[country]" type="text" class="form-control"
+                                required>
+                            <div class="valid-feedback">looks great!</div>
+                            <div class="invalid-feedback">Country name should be valid</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location</label>
+                        <input placeholder="Jaipur,Rajasthan" name="listing[location]" type="text" class="form-control"
+                            required>
+                        <div class="valid-feedback">looks great!</div>
+                        <div class="invalid-feedback">Location should be valid</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select name="listing[category]" id="category" class="form-select" required>
+                            <option value="" selected disabled>Choose a category</option>
+                            <option value="Trending">Trending</option>
+                            <option value="Rooms">Rooms</option>
+                            <option value="Mountains">Mountains</option>
+                            <option value="Cities">Cities</option>
+                            <option value="Pools">Pools</option>
+                            <option value="Camping">Camping</option>
+                            <option value="Farms">Farms</option>
+                            <option value="Arctic">Arctic</option>
+                            <option value="Beachfront">Beachfront</option>
+                            <option value="Forest">Forest</option>
+                            <option value="Villas">Villas</option>
+                            <option value="Desert Nights">Desert Nights</option>
+                            <option value="Boathouses">Boathouses</option>
+                        </select>
+                        <div class="invalid-feedback">Please select a category.</div>
+                    </div>
+                    <button class="btn btn-dark">add</button><br><br>
+                </form>
+            </div>
+        </div>
+    </body>

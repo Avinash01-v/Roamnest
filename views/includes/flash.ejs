@@ -1,0 +1,46 @@
+<style>
+    /* Flash Messages - Responsive Design */
+
+    @media (max-width: 768px) {
+
+        .flash-message-success,
+        .flash-message-error {
+            width: 85%;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 14px;
+            padding: 14px 40px 14px 14px;
+        }
+    }
+
+    @media (max-width: 480px) {
+
+        .flash-message-success,
+        .flash-message-error {
+            width: 94%;
+            font-size: 13px;
+            padding: 12px 38px 12px 12px;
+            overflow-wrap: anywhere;
+        }
+
+        .flash-message-success .btn-close,
+        .flash-message-error .btn-close {
+            font-size: 12px;
+        }
+    }
+</style>
+<%if(success && success.length) { %>
+    <div class="alert alert-success alert-dismissible fade show col-6 offset-3 flash-message-success" role="alert">
+        <%= success %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <%} %>
+
+
+
+        <%if(error && error.length) { %>
+            <div class="alert alert-danger alert-dismissible fade show col-6 offset-3 flash-message-error" role="alert">
+                <%= error %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <%} %>

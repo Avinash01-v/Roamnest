@@ -1,0 +1,245 @@
+<% layout("/layouts/boilerplate") %>
+
+    <style>
+        /* Admin Listings Management */
+
+        .admin-property {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 190px;
+            font-weight: 500;
+        }
+
+        .admin-property-image {
+            width: 65px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 7px;
+            border: 1px solid #fee2e2;
+            flex-shrink: 0;
+        }
+
+        .admin-panel .btn-outline-danger {
+            border-color: #b91c1c;
+            color: #b91c1c;
+        }
+
+        .admin-panel .btn-outline-danger:hover {
+            background: #b91c1c;
+            color: #fff;
+        }
+
+        .admin-search-form {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Admin Listings - Smartphone Responsiveness */
+
+        @media (max-width: 768px) {
+
+            .admin-dashboard {
+                padding: 16px;
+            }
+
+            .admin-heading {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .admin-heading h2 {
+                font-size: 23px;
+            }
+
+            .admin-heading p {
+                font-size: 14px;
+            }
+
+            .admin-panel {
+                padding: 14px;
+                min-width: 0;
+                overflow: hidden;
+            }
+
+            /* Search form */
+            .admin-search-form {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+                height: auto !important;
+            }
+
+            .admin-search-form .form-control,
+            .admin-search-form button,
+            .admin-search-form a {
+                width: 100%;
+                margin-right: 0 !important;
+            }
+
+            /* Listings table */
+            .table-responsive {
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .admin-panel table {
+                min-width: 750px;
+                font-size: 13px;
+            }
+
+            .admin-panel table th,
+            .admin-panel table td {
+                white-space: nowrap;
+                padding: 10px 8px;
+            }
+
+            .admin-property {
+                min-width: 190px;
+            }
+
+            .admin-property-image {
+                width: 55px;
+                height: 42px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .admin-dashboard {
+                padding: 12px;
+            }
+
+            .admin-heading h2 {
+                font-size: 21px;
+            }
+
+            .admin-panel {
+                padding: 10px;
+            }
+
+            .admin-property {
+                gap: 8px;
+                font-size: 12px;
+            }
+
+            .admin-property-image {
+                width: 48px;
+                height: 40px;
+            }
+
+            .admin-panel table {
+                font-size: 12px;
+            }
+        }
+    </style>
+
+
+    <div class="admin-layout">
+        <%- include("partials/sidebar.ejs") %>
+
+            <main class="admin-main">
+                <div class="admin-dashboard">
+
+                    <div class="admin-heading">
+                        <div>
+                            <h2>Listings Management</h2>
+                            <p>View all properties listed on Roamnest.</p>
+                        </div>
+
+                        <span>
+                            <i class="fa-solid fa-house"></i>
+                            Total: <%= listings.length %>
+                        </span>
+                    </div>
+
+                    <div class="admin-panel">
+                        <form action="/admin/listings" method="GET" class="admin-search-form mb-3"
+                            style="height: 2rem;">
+                            <input type="text" name="search" class="form-control"
+                                placeholder="Search title, location or country..." value="<%= search %>"
+                                style="margin-right: 1rem;">
+
+                            <button type="submit" class="btn btn-danger" style="margin-right: 1rem;">
+                                <!-- <i class="fa-solid fa-magnifying-glass"></i>  -->
+                                Search
+                            </button>
+
+                            <a href="/admin/listings" class="btn btn-outline-danger" style="margin-right: 1rem;">
+                                Reset
+                            </a>
+                        </form>
+
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Property</th>
+                                        <th>Location</th>
+                                        <th>Price / Night</th>
+                                        <th>Owner</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <% if (listings.length===0) { %>
+                                        <tr>
+                                            <td colspan="6" class="text-center py-4">
+                                                No listings found.
+                                            </td>
+                                        </tr>
+                                        <% } else { %>
+
+                                            <% listings.forEach((listing, index)=> { %>
+                                                <tr>
+                                                    <td>
+                                                        <%= index + 1 %>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="admin-property">
+                                                            <img src="<%= listing.image && listing.image.url ? listing.image.url : '/images/scenery.jpg' %>"
+                                                                alt="Property image" class="admin-property-image">
+                                                            <span>
+                                                                <%= listing.title %>
+                                                            </span>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <%= listing.location || "—" %>,
+                                                            <%= listing.country || "—" %>
+                                                    </td>
+
+                                                    <td>
+                                                        ₹<%= Number(listing.price || 0).toLocaleString("en-IN") %>
+                                                    </td>
+
+                                                    <td>
+                                                        <%= listing.owner ? listing.owner.username : "Owner unavailable"
+                                                            %>
+                                                    </td>
+
+                                                    <td>
+                                                        <a href="/listings/<%= listing._id %>"
+                                                            class="btn btn-sm btn-outline-danger">
+                                                            <i class="fa-solid fa-eye"></i>
+                                                            View
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+
+                                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+    </div>

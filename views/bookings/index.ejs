@@ -1,0 +1,163 @@
+<% layout("/layouts/boilerplate") %>
+    <style>
+        /* Booking Requests - Smartphone Responsiveness */
+
+        @media (max-width: 768px) {
+
+            .container.mt-5.mb-5 {
+                margin-top: 25px !important;
+                margin-bottom: 25px !important;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .container h2 {
+                font-size: 23px;
+                margin-bottom: 18px !important;
+            }
+
+            .table-responsive {
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .table-responsive table {
+                min-width: 850px;
+                font-size: 13px;
+            }
+
+            .table-responsive th,
+            .table-responsive td {
+                padding: 10px 8px;
+                white-space: nowrap;
+            }
+
+            /* Approve and Reject buttons */
+            .table-responsive td .d-flex {
+                gap: 8px !important;
+            }
+
+            .table-responsive td .btn {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .container.mt-5.mb-5 {
+                margin-top: 18px !important;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .container h2 {
+                font-size: 21px;
+            }
+
+            .table-responsive table {
+                min-width: 820px;
+                font-size: 12px;
+            }
+
+            .table-responsive th,
+            .table-responsive td {
+                padding: 8px 7px;
+            }
+
+            .table-responsive td .btn {
+                font-size: 11px;
+            }
+        }
+    </style>
+    <div class="container mt-5 mb-5">
+        <h2 class="mb-4">Booking Requests</h2>
+
+        <% if (bookings.length===0) { %>
+            <div class="alert alert-info">
+                You don't have any booking requests yet.
+            </div>
+            <% } else { %>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Property</th>
+                                <th>Guest</th>
+                                <th>Check-in</th>
+                                <th>Check-out</th>
+                                <th>Guests</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% bookings.forEach(booking=> { %>
+                                <tr>
+                                    <td>
+                                        <% if (booking.listing) { %>
+                                            <a href="/listings/<%= booking.listing._id %>">
+                                                <%= booking.listing.title %>
+                                            </a>
+                                            <% } else { %>
+                                                Listing unavailable
+                                                <% } %>
+                                    </td>
+
+                                    <td>
+                                        <%= booking.guest ? booking.guest.username : "User unavailable" %>
+                                    </td>
+
+                                    <td>
+                                        <%= new Date(booking.checkIn).toLocaleDateString("en-IN") %>
+                                    </td>
+
+                                    <td>
+                                        <%= new Date(booking.checkOut).toLocaleDateString("en-IN") %>
+                                    </td>
+
+                                    <td>
+                                        <%= booking.guests %>
+                                    </td>
+
+                                    <td>
+                                        <span class="badge
+                                    <%= booking.status === 'confirmed' ? 'bg-success' :
+                                        booking.status === 'rejected' ? 'bg-danger' :
+                                        booking.status === 'cancelled' ? 'bg-secondary' :
+                                        'bg-warning text-dark' %>">
+                                            <%= booking.status %>
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <% if (booking.status==="pending" ) { %>
+                                            <div class="d-flex gap-2">
+                                                <form action="/bookings/<%= booking._id %>/approve" method="POST">
+                                                    <button class="btn btn-success btn-sm" type="submit">
+                                                        Approve
+                                                    </button>
+                                                </form>
+
+                                                <form action="/bookings/<%= booking._id %>/reject" method="POST">
+                                                    <button class="btn btn-outline-danger btn-sm" type="submit">
+                                                        Reject
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <% } else { %>
+                                                <span class="text-muted">No actions available</span>
+                                                <% } %>
+                                    </td>
+
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+
+                <% } %>
+    </div>

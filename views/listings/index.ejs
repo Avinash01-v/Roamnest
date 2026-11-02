@@ -1,0 +1,301 @@
+<% layout("/layouts/boilerplate") %>
+    <style>
+        #filters {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+        }
+
+        .filter {
+            text-align: center;
+            margin-right: 1.7rem;
+            margin-top: 1rem;
+            opacity: 0.7;
+            text-decoration: none;
+            color: black;
+            padding: 0 0 0 0.5rem;
+        }
+
+        .filter:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .filter p {
+            font-size: 0.7rem;
+        }
+
+        .tax-toggle {
+            border: 2px solid black;
+            border-radius: 2rem;
+            height: 3rem;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .tax-info {
+            display: none;
+        }
+
+        /* Explore Listings - Smartphone Responsiveness */
+
+        #filters {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            overflow-x: auto;
+            overflow-y: hidden;
+            gap: 8px;
+            padding: 5px 10px 12px;
+            scrollbar-width: thin;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .filter {
+            flex: 0 0 auto;
+            margin-right: 10px;
+            padding: 0 8px;
+            min-width: 65px;
+        }
+
+        .filter i {
+            font-size: 20px;
+        }
+
+        .filter p {
+            white-space: nowrap;
+            margin-bottom: 0;
+        }
+
+        .tax-toggle {
+            flex: 0 0 auto;
+            height: auto;
+            min-height: 45px;
+            padding: 10px 14px;
+            white-space: nowrap;
+        }
+
+        .tax-toggle .form-check-label {
+            font-size: 13px;
+        }
+
+        /* Listing cards */
+
+        .listing-card {
+            width: 100% !important;
+            height: 100%;
+        }
+
+        .listing-card .card-img-top {
+            width: 100%;
+            height: 250px !important;
+            object-fit: cover;
+        }
+
+        .listing-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Tablet */
+
+        @media (max-width: 768px) {
+
+            #filters {
+                gap: 5px;
+            }
+
+            .filter {
+                margin-right: 5px;
+            }
+
+            .tax-toggle {
+                padding: 8px 12px;
+            }
+
+            .row.row-cols-lg-3 {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .listing-card .card-img-top {
+                height: 230px !important;
+            }
+        }
+
+        /* Smartphones */
+
+        @media (max-width: 480px) {
+
+            #filters {
+                padding: 5px 8px 12px;
+            }
+
+            .filter {
+                min-width: 58px;
+                margin-right: 3px;
+                padding: 0 5px;
+            }
+
+            .filter i {
+                font-size: 18px;
+            }
+
+            .filter p {
+                font-size: 10px;
+            }
+
+            .tax-toggle {
+                padding: 8px 10px;
+                min-height: 40px;
+            }
+
+            .tax-toggle .form-check-label {
+                font-size: 11px;
+            }
+
+            .listing-card {
+                margin-bottom: 15px;
+            }
+
+            .listing-card .card-img-top {
+                height: 210px !important;
+            }
+
+            .listing-card .card-body {
+                padding: 12px;
+            }
+
+            .listing-card .card-text {
+                font-size: 14px;
+            }
+        }
+    </style>
+
+    <body>
+        <!-- <h3 class="mb-3 mt-3">All Listings</h3> -->
+        <!-- <form action="/listings/new" method="get">
+        <button>create new listing</button>
+    </form> -->
+        <div id="filters">
+
+            <a href="/listings?category=Trending" class="filter">
+                <div><i class="fa-solid fa-fire"></i></div>
+                <p>Trending</p>
+            </a>
+
+            <a href="/listings?category=Rooms" class="filter">
+                <div><i class="fa-solid fa-bed"></i></div>
+                <p>Rooms</p>
+            </a>
+
+            <a href="/listings?category=Mountains" class="filter">
+                <div><i class="fa-solid fa-mountain"></i></div>
+                <p>Mountains</p>
+            </a>
+
+            <a href="/listings?category=Cities" class="filter">
+                <div><i class="fa-solid fa-city"></i></div>
+                <p>Cities</p>
+            </a>
+
+            <a href="/listings?category=Pools" class="filter">
+                <div><i class="fa-solid fa-person-swimming"></i></div>
+                <p>Pools</p>
+            </a>
+
+            <a href="/listings?category=Camping" class="filter">
+                <div><i class="fa-solid fa-tent"></i></div>
+                <p>Camping</p>
+            </a>
+
+            <a href="/listings?category=Farms" class="filter">
+                <div><i class="fa-solid fa-wheat-awn"></i></div>
+                <p>Farms</p>
+            </a>
+
+            <a href="/listings?category=Arctic" class="filter">
+                <div><i class="fa-solid fa-snowflake"></i></div>
+                <p>Arctic</p>
+            </a>
+
+            <a href="/listings?category=Beachfront" class="filter">
+                <div><i class="fa-solid fa-umbrella-beach"></i></div>
+                <p>Beachfront</p>
+            </a>
+
+            <a href="/listings?category=Forest" class="filter">
+                <div><i class="fa-solid fa-tree"></i></div>
+                <p>Forest</p>
+            </a>
+
+            <a href="/listings?category=Villas" class="filter">
+                <div><i class="fa-solid fa-house-chimney-window"></i></div>
+                <p>Villas</p>
+            </a>
+
+            <a href="/listings?category=Desert%20Nights" class="filter">
+                <div><i class="fa-solid fa-moon"></i></div>
+                <p>Desert Nights</p>
+            </a>
+
+            <a href="/listings?category=Boathouses" class="filter">
+                <div><i class="fa-solid fa-ship"></i></div>
+                <p>Boathouses</p>
+            </a>
+
+            <div class="tax-toggle">
+                <div class="form-check-reverse form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+                </div>
+            </div>
+        </div>
+        <% if (allListings.length===0) { %>
+            <div class="col-12 text-center mt-5 mb-5">
+                <i class="fa-solid fa-map-location-dot fa-3x mb-3" style="color: #fe422d;"></i>
+                <h3>Oops! No stays found</h3>
+                <p class="text-muted">
+                    We couldn't find any stays matching your search.
+                    Try another destination or explore our available stays.
+                </p>
+                <a href="/listings" class="btn btn-dark mt-2">
+                    <i class="fa-solid fa-compass me-2"></i>Explore All Stays
+                </a>
+            </div>
+            <% } else { %>
+                <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+                    <% for(let listing of allListings){ %>
+                        <a href="/listings/<%= listing._id %>" class="listing-link">
+                            <div class="card col listing-card">
+                                <img src="<%= listing.image.url %>" class="card-img-top" alt="listing-image">
+                                <div class="card-img-overlay"></div>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <b>
+                                            <%= listing.title %>
+                                        </b> <br>
+                                        &#8377; <%= listing.price %>/week <i class="tax-info">&nbsp;+18% GST</i>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                        <% } %>
+                </div>
+                <% } %>
+    </body>
+
+    <script>
+        let taxswitch = document.getElementById("flexSwitchCheckDefault");
+        taxswitch.addEventListener("click", () => {
+            let taxinfo = document.getElementsByClassName("tax-info");
+            for (info of taxinfo) {
+                if (info.style.display != "inline") {
+                    info.style.display = "inline";
+                } else {
+                    info.style.display = "none";
+                }
+            }
+        });
+    </script>
